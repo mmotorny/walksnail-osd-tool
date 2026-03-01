@@ -103,6 +103,7 @@ impl WalksnailOsdTool {
             app_version,
             target,
             dark_mode,
+            render_settings: saved_settings.render_options,
             ..Default::default()
         }
     }
