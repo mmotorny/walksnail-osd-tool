@@ -63,7 +63,12 @@ impl WalksnailOsdTool {
         update_check_promise: Option<Promise<Result<Option<GitHubReleaseItem>, LookupError>>>,
     ) -> Self {
         set_style(ctx);
-        let mut visuals = Visuals::light();
+        let dark_mode = saved_settings.dark_mode;
+        let mut visuals = if dark_mode {
+            Visuals::dark()
+        } else {
+            Visuals::light()
+        };
         visuals.indent_has_left_vline = false;
         set_custom_fonts(ctx);
         ctx.set_visuals(visuals);
@@ -97,6 +102,7 @@ impl WalksnailOsdTool {
             app_update,
             app_version,
             target,
+            dark_mode,
             ..Default::default()
         }
     }
@@ -184,6 +190,11 @@ impl eframe::App for WalksnailOsdTool {
         self.render_central_panel(ctx);
 
         self.save_config_if_changed();
+    }
+
+    fn on_exit(&mut self, _gl: Option<&eframe::glow::Context>) {
+        let config: AppConfig = self.into();
+        config.save();
     }
 }
 
