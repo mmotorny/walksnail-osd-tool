@@ -7,6 +7,8 @@ use crate::{ffmpeg::RenderSettings, osd::OsdOptions, srt::SrtOptions, util::AppU
 #[derive(Debug, Deserialize, Serialize, Derivative)]
 #[derivative(Default)]
 pub struct AppConfig {
+    #[serde(default)]
+    pub dark_mode: bool,
     pub osd_options: OsdOptions,
     pub srt_options: SrtOptions,
     pub render_options: RenderSettings,

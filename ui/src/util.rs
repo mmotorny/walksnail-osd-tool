@@ -158,6 +158,7 @@ pub fn set_custom_fonts(ctx: &egui::Context) {
 impl Into<AppConfig> for &mut WalksnailOsdTool {
     fn into(self) -> AppConfig {
         AppConfig {
+            dark_mode: self.dark_mode,
             osd_options: self.osd_options.clone(),
             srt_options: self.srt_options.clone(),
             render_options: self.render_settings.clone(),
